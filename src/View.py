@@ -2,7 +2,7 @@ import random
 
 
 class View(object):
-    def __init__(self, ratio=0.2, num_of_cols=25, num_of_rows=18):
+    def __init__(self, ratio, num_of_cols, num_of_rows):
         self.num_of_cols = num_of_cols
         self.num_of_rows = num_of_rows
         self.round = 0
@@ -11,7 +11,6 @@ class View(object):
              for j in range(num_of_cols)] for i in range(num_of_rows)]
 
     def update(self): #游戏界面更新
-        print('update')
         backup = list()
         backup = [[self.map[i][j] for j in range(self.num_of_cols)] for i in range(self.num_of_rows)]
         for i in range(self.num_of_rows):
@@ -22,13 +21,11 @@ class View(object):
                     self.map[i][j] = 0
                 
         self.round += 1
-        
 
     def count_neighbours(self, i, j, backup):     #判断下一回合是不是活细胞
-     
         up = i - 1 if i > 0 else self.num_of_rows - 1
         down = i + 1 if i < self.num_of_rows - 1 else 0
         left = j - 1 if j > 0 else self.num_of_cols - 1
         right = j + 1 if j < self.num_of_cols - 1 else 0
         return backup[i][left] + backup[i][right] + backup[up][j] + backup[down][j] + backup[up][left] \
-               + backup[up][right] + backup[down][left] + backup[down][right];
+               + backup[up][right] + backup[down][left] + backup[down][right]
